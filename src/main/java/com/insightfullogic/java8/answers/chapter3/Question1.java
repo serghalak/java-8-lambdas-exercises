@@ -10,6 +10,7 @@ import static java.util.stream.Collectors.toList;
 
 public class Question1 {
     public static int addUp(Stream<Integer> numbers) {
+
         return numbers.reduce(0, (acc, x) -> acc + x);
     }
 
@@ -24,4 +25,11 @@ public class Question1 {
                     .filter(album -> album.getTrackList().size() <= 3)
                     .collect(toList());
     }
+
+//    public static int addUp1(List<Artist> artists) {
+//
+//        return artists.stream()
+//                .map(artist -> artist.getMembers().count())
+//                .reduce(0L,(acc,x)->acc+x).intValue();
+//    }
 }

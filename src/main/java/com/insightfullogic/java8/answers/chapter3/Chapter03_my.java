@@ -1,14 +1,18 @@
 package com.insightfullogic.java8.answers.chapter3;
 
+import com.insightfullogic.java8.examples.chapter1.Album;
 import com.insightfullogic.java8.examples.chapter1.Artist;
 import com.insightfullogic.java8.examples.chapter1.SampleData;
 import com.insightfullogic.java8.examples.chapter1.Track;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.lang.Character.isDigit;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toSet;
 
 public class Chapter03_my {
 
@@ -26,7 +30,12 @@ public class Chapter03_my {
         //lMap();
         //lFilter();
         //lFlatMap();
-        min_max();
+        //min_max();
+        //lreduce();
+        //all_nationality();
+
+        Ex3_7();
+        //countLowerCase();
     }
 
     private static List<Artist>getAllArtists(){
@@ -81,4 +90,39 @@ public class Chapter03_my {
         System.out.println("min="+shortestTrack.getName()+'\n'
                 +"max="+longestTrack.getName());
     }
+    private static void lreduce(){
+        Integer sum =
+                Stream.of(1, 2, 3 )
+                        .reduce(0, (acc, element) -> acc + element);
+        System.out.println("sum="+sum);
+    }
+    private static void all_nationality(){
+        Album album = SampleData.aLoveSupreme;
+        List<String> origins = album.getMusicians()
+                .filter(artist -> {
+                    System.out.println(artist.getName());
+                    //artist.getName().startsWith("The")
+                    return true;
+                })
+                .map(artist -> artist.getNationality())
+                .collect(Collectors.toList());
+        System.out.println(origins);
+
+    }
+    private static void Ex3_7(){
+        List<String>list=Arrays.asList("Serg","Volodimir","MiSha");
+        String s = list.stream()
+                .max(Comparator.comparing(Chapter03_my::countLowerCase))
+                .get();
+
+
+        System.out.println(s);
+    }
+    private static long countLowerCase(String name){
+        //String name="SeRgiy";
+        long count = name.chars().filter(Character::isLowerCase).count();
+        System.out.println(count);
+        return count;
+    }
+
 }

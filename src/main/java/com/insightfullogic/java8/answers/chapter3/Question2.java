@@ -15,4 +15,6 @@ public class Question2 {
         
         //return (int) artists.stream().flatMap(artist -> artist.getMembers()).count();
     }
+
+
 }
