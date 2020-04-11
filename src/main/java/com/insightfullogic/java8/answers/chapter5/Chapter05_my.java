@@ -25,7 +25,8 @@ public class Chapter05_my {
 //        double averageNumberOfTracks = averageNumberOfTracks(
 //                SampleData.albums.collect(Collectors.toList()));
 //        System.out.println(averageNumberOfTracks);
-        bandsAndSolo(SampleData.threeArtists());
+        //bandsAndSolo(SampleData.threeArtists());
+        albumsByArtist(SampleData.albums);
     }
 
     private static Optional<Artist>biggestGroup(
@@ -49,6 +50,15 @@ public class Chapter05_my {
         Map<Boolean, List<Artist>> collect =
                 artists.collect(
                         Collectors.partitioningBy(Artist::isSolo));
+        System.out.println(collect);
+        return collect;
+    }
+
+    private static Map<Artist,List<Album>>
+        albumsByArtist(Stream<Album>albums){
+        Map<Artist, List<Album>> collect = albums.collect(
+                Collectors.groupingBy(
+                        album -> album.getMainMusician()));
         System.out.println(collect);
         return collect;
     }
