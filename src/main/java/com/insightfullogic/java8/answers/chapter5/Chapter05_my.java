@@ -6,6 +6,7 @@ import com.insightfullogic.java8.examples.chapter1.SampleData;
 import com.insightfullogic.java8.examples.chapter3.Functional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,9 +22,10 @@ public class Chapter05_my {
     public static void main(String[] args) {
 //        Optional<Artist> artist = biggestGroup(SampleData.threeArtists());
 //        System.out.println(artist.get().getMembers().count());
-        double averageNumberOfTracks = averageNumberOfTracks(
-                SampleData.albums.collect(Collectors.toList()));
-        System.out.println(averageNumberOfTracks);
+//        double averageNumberOfTracks = averageNumberOfTracks(
+//                SampleData.albums.collect(Collectors.toList()));
+//        System.out.println(averageNumberOfTracks);
+        bandsAndSolo(SampleData.threeArtists());
     }
 
     private static Optional<Artist>biggestGroup(
@@ -40,5 +42,14 @@ public class Chapter05_my {
         ));
         return average;
 
+    }
+
+    public static Map<Boolean,List<Artist>>bandsAndSolo(
+      Stream<Artist>artists){
+        Map<Boolean, List<Artist>> collect =
+                artists.collect(
+                        Collectors.partitioningBy(Artist::isSolo));
+        System.out.println(collect);
+        return collect;
     }
 }
