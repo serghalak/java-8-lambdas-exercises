@@ -19,7 +19,9 @@ public class TestStrem {
         //limits(menu);
         //firstTwoMeatDishes(menu);
         //flatMap(Arrays.asList("Hello","World"));
-        comb(Arrays.asList(1,2,3), Arrays.asList(3,4));
+        //comb(Arrays.asList(1,2,3), Arrays.asList(3,4));
+        //optional(menu);
+        reduce(menu);
     }
 
     private static void takeWhile(List<Dish> menu){
@@ -63,6 +65,8 @@ public class TestStrem {
 
     }
 
+
+
     private static void comb(List<Integer> numbers1,List<Integer>numbers2){
 
         List<int[]> collect = numbers1.stream()
@@ -73,6 +77,25 @@ public class TestStrem {
         for (int[] i : collect) {
             System.out.println(Arrays.toString(i));
         }
+
+    }
+
+    private static void optional(List<Dish>menu){
+        menu.stream()
+                .filter(Dish::isVegetarian)
+                .findAny()
+                .ifPresent(dish -> System.out.println(dish.getName()));
+    }
+
+    private static void reduce(List<Dish>menu){
+
+        Integer reduce = menu.stream()
+                .map(dish -> 1)
+                .reduce(0, Integer::sum);
+
+        //long count = menu.stream().count();
+        System.out.println("Total count dishes is: " + reduce);
+
 
     }
 }
