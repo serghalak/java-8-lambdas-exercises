@@ -1,9 +1,17 @@
 package modernjavainaction.chap05;
 
+import org.apache.commons.math3.geometry.partitioning.utilities.OrderedTuple;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
@@ -30,14 +38,18 @@ public class PuttingIntoPractice {
 
   public static void main(String... args) {
 
-    query1(getTransaction());
-    query2(getTransaction());
-    query3(getTransaction());
-    query4(getTransaction());
-    query5(getTransaction());
-    query6(getTransaction());
-    query7(getTransaction());
-    query8(getTransaction());
+//    query1(getTransaction());
+//    query2(getTransaction());
+//    query3(getTransaction());
+//    query4(getTransaction());
+//    query5(getTransaction());
+//    query6(getTransaction());
+//    query7(getTransaction());
+//    query8(getTransaction());
+//    triplex();
+//      files();
+//      fibonacci();
+      iterator();
   }
 
   private static void query1(List<Transaction> transactions){
@@ -129,5 +141,46 @@ public class PuttingIntoPractice {
             transactions.stream().min((o1, o2) -> (o1.getValue() - o2.getValue()));
 
     System.out.println(min.get());
+  }
+
+  private static void triplex(){
+
+    IntStream.rangeClosed(1, 100)
+            .boxed()
+            .flatMap(a -> IntStream.rangeClosed(a, 100)
+                    .mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)})
+                    .filter(t -> t[2] % 1 == 0))
+            .forEach(doubles -> System.out.println(
+                    doubles[0] + ":" + doubles[1] + ":" + doubles[2]));
+
+
+
+  }
+
+  private static void files(){
+      long count=0;
+      try(Stream<String> lines = Files.lines(Paths.get("data.txt"))) {
+          count = lines.flatMap(s ->   {
+            System.out.println("s: " + s);
+            return Arrays.stream(s.split(" "));
+          }).distinct().count();
+
+          System.out.println("count: " + count);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
+
+  private static void fibonacci(){
+      Stream.iterate(new int[]{0,1},n->new int[]{n[1],n[0]+n[1]})
+              .map(ints -> "("+ints[0]+", " +ints[1]+")")
+              .limit(20)
+              .forEach(System.out::println);
+  }
+
+  private static void iterator(){
+    Stream.iterate(0,i ->i<100,n->n+4 )
+            .forEach(System.out::println);
+
   }
 }
