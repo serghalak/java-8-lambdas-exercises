@@ -8,19 +8,15 @@ import java.util.stream.Collectors;
 public class CollectorsExamles {
 
     public static void main(String[] args) {
-
-
-
-
         List<Dish> menu = Dish.menu;
         //counting(menu);
         //maxCalories(menu);
-        //totalCalories(menu);
+        totalCalories(menu);
         //group(menu);
         //groupEnum(menu);
         //groupFilter(menu);
         //groupMapping(menu);
-        groupflatMapping(menu);
+        //groupflatMapping(menu);
     }
 
     private static void counting(List<Dish> menu){
