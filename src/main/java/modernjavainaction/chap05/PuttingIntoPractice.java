@@ -1,6 +1,6 @@
 package modernjavainaction.chap05;
 
-import org.apache.commons.math3.geometry.partitioning.utilities.OrderedTuple;
+//import org.apache.commons.math3.geometry.partitioning.utilities.OrderedTuple;
 
 import java.io.IOException;
 import java.nio.file.Files;

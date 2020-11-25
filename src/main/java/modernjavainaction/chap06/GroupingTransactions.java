@@ -27,8 +27,23 @@ public class GroupingTransactions {
   );
 
   public static void main(String... args) {
-    groupImperatively();
-    groupFunctionally();
+    //groupImperatively();
+    //groupFunctionally();
+    goupFor();
+  }
+
+  private static void goupFor(){
+    Map<Currency,Double> map= new HashMap<>();
+    for(Transaction transaction : transactions){
+      if(map.containsKey(transaction.getCurrency())){
+        map.put(transaction.getCurrency(),transaction.value);
+      }  else{
+        double sumOfTrans=transaction.getValue();
+        map.put(transaction.getCurrency(),transaction.getValue()+sumOfTrans);
+      }
+
+    }
+    System.out.println(map);
   }
 
   private static void groupImperatively() {
